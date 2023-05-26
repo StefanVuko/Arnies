@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "Inter";
+  src: local("Inter"),
+    url("./resources/fonts/Inter-Regular.ttf") format("truetype");
+}
+
+body {
+  font-family: "Inter";
+}
