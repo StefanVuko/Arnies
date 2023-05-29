@@ -6,8 +6,21 @@ import Register from "./pages/Register"
 import About from "./pages/About"
 import Nutrition from "./pages/Nutrition"
 import Tracker from "./pages/Tracker"
+import React, { useEffect, useState } from "react"
 
 function App() {
+
+  const [data, setData] = React.useState(null);
+
+  React.useEffect(() => {
+    const getData = async () => {
+      const data = await fetch("http://localhost:5000/pog")
+      console.log(data)
+    }
+    getData()
+  }, []);
+
+
 
   return (
     <>
