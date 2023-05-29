@@ -1,8 +1,11 @@
+import { AiOutlineHome } from "react-icons/ai"
+
 function Navbar() {
     return (
         <nav>
             <div className="navbar--left">
                 <ul>
+                    <li className="navbar--item"><a href="/"><AiOutlineHome></AiOutlineHome></a></li>
                     <li className="navbar--item"><a href="/workout">WorkOUT </a></li>
                     <li className="navbar--item"><a href="/nutrition">Nutriti Tool </a></li>
                     <li className="navbar--item"><a href="/tracker">Tracker </a></li>

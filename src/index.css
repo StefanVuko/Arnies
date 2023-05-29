@@ -18,6 +18,17 @@ nav {
   display: flex;
   align-items: center;
   color: gray;
+  position: sticky; top: 0;
+}
+
+footer {
+  width: auto;
+  height: 60px;
+  background-color: #DBE0D5;
+  color: gray;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 li {
@@ -36,10 +47,11 @@ a:hover {
 .navbar--left {
   display: flex;
   align-items: start;
+  min-width: 500px;
 }
 
 .navbar--right {
-  margin-left: 62%;
+  margin-left: auto;
   display: flex;
   align-items: end;
 }
@@ -61,7 +73,6 @@ a:hover {
   min-height: 120px;
   background-color: #DBE0D5;
   color: grey;
-  
 }
 
 .header--quote {
@@ -101,23 +112,13 @@ a:hover {
   align-items: center;
   flex-wrap: wrap;
   background-color: #F2F0EA;
-}
-
-.section--info--container2 {
-  width: 500px;
-  min-height: 250px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  background-color: #F2F0EA;
-  margin-right: 20px;
+  margin: 10px;
 }
 
 .section--image--container {
-  width: 300px;
+  width: 200px;
   height: 200px;
-  margin-right: 20px;
+  margin: 10px;
 }
 
 .section--image {
@@ -161,4 +162,29 @@ a:hover {
   font-weight: 500;
   font-size: 1rem;
   border: none;
+}
+
+.footer--text {
+  height: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+}
+
+.footer--icons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+
+.footer--iconlist {
+  padding-left: 0px;
+}
+
+.footer--item {
+  padding: 0rem 0.5rem;
 }
