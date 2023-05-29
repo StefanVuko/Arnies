@@ -11,4 +11,3 @@ Using
 
 "npm run dev" to start server
 / or /home to get to the mainpage
-/workout for the workout page
