@@ -162,10 +162,15 @@ a:hover {
   height: 100%;
   width: 100%;
   border-radius: 5px;
-  color: orange;
-  font-weight: 500;
+  color: lightcoral;
+  font-weight: 600;
   font-size: 1rem;
   border: none;
+}
+
+.section--button:hover {
+  background-color: lightcoral;
+  color: white;
 }
 
 .footer--text {
@@ -239,12 +244,63 @@ a:hover {
 }
 
 .register--button {
-  background-color: orange;
+  background-color: lightcoral;
   height: 100%;
   width: 100%;
   border-radius: 5px;
   color: white;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1rem;
   border: none;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.register--button span {
+  transition: all 0.3s;
+}
+.register--button::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-color: rgba(255,255,255,0.5);
+  border-bottom-color: rgba(255,255,255,0.5);
+  transform: scale(0.1, 1);
+}
+.register--button:hover span {
+  letter-spacing: 2px;
+}
+.register--button:hover::before {
+  opacity: 1; 
+  transform: scale(1, 1); 
+}
+.register--button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.3s;
+  background-color: rgba(255,255,255,0.1);
+}
+.register--button:hover::after {
+  opacity: 0; 
+  transform: scale(0.1, 1);
+}
+
+.content--container {
+  width: auto;
+  min-height: 90vh;
 }

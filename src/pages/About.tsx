@@ -1,11 +1,11 @@
 import Navbar from "../components/Navbar"
 
 function About() {
-    return (
-        <>
-            <Navbar></Navbar>
-        </>
-    )
+  return (
+    <>
+      <Navbar></Navbar>
+    </>
+  )
 }
 
 export default About
