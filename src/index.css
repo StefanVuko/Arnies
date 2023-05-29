@@ -5,5 +5,160 @@
 }
 
 body {
+  margin: 0px;
   font-family: "Inter";
+  background-color: #F7F6F2;
+  font-size: 1rem;
+}
+
+nav {
+  min-height: 60px;
+  width: 100%;
+  background-color: #DBE0D5;
+  display: flex;
+  align-items: center;
+  color: gray;
+}
+
+li {
+  display: inline;
+}
+
+a {
+  text-decoration:none; 
+  color:gray;
+}
+
+a:hover {
+  color:white;
+}
+
+.navbar--left {
+  display: flex;
+  align-items: start;
+}
+
+.navbar--right {
+  margin-left: 62%;
+  display: flex;
+  align-items: end;
+}
+
+.navbar--item {
+  padding: 1rem;
+}
+
+.header--title {
+  min-height: 85px;
+  width: auto;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header--text {
+  min-height: 120px;
+  background-color: #DBE0D5;
+  color: grey;
+  
+}
+
+.header--quote {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.header--author {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px;
+}
+
+.header--p {
+  max-width: 75ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.section--container {
+  width: auto;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.section--info--container {
+  width: 500px;
+  min-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #F2F0EA;
+}
+
+.section--info--container2 {
+  width: 500px;
+  min-height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #F2F0EA;
+  margin-right: 20px;
+}
+
+.section--image--container {
+  width: 300px;
+  height: 200px;
+  margin-right: 20px;
+}
+
+.section--image {
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 50%;
+}
+
+.section--text {
+  width: 400px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #73736e;
+  color: white;
+}
+
+.section--text--container {
+  width: 400px;
+  height: 115px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.section--button--container {
+  height: 50px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section--button {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  color: orange;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
 }

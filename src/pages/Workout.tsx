@@ -1,7 +1,9 @@
+import Navbar from "../components/Navbar";
+
 function Workout() {
     return (
         <>
-            <h1>hey workout</h1>
+            <Navbar></Navbar>
         </>
     )
 }
