@@ -35,7 +35,8 @@ const sections = [{
   text3: "This is a project for university",
   buttonTxt: "Find more about us!",
   buttonUrl: "about"
-}]
+},
+]
 
 function Home() {
   return (

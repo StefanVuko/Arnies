@@ -1,9 +1,15 @@
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Exercise from "../components/Exercise";
 
 function Workout() {
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar />
+      <div className="content--container">
+        <Exercise></Exercise>
+      </div>
+      <Footer />
     </>
   )
 }

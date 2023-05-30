@@ -10,15 +10,15 @@ function RegisterForm() {
         </div>
         <div className="register--form--input">
           <form>
-            <label htmlFor="email">E-Mail:</label>
+            <label className="register--form--label" htmlFor="email">E-Mail</label>
             <input id="email" className="register--input--text" type="text"></input>
-            <label htmlFor="username">Username:</label>
+            <label className="register--form--label" htmlFor="username">Username</label>
             <input id="username" className="register--input--text" type="text"></input>
-            <label htmlFor="password">Password:</label>
+            <label className="register--form--label" htmlFor="password">Password</label>
             <input id="password" className="register--input--text" type="password"></input>
-            <label htmlFor="firstName">First name:</label>
+            <label className="register--form--label" htmlFor="firstName">First name</label>
             <input id="firstName" className="register--input--text" type="text"></input>
-            <label htmlFor="lastName">Last name:</label>
+            <label className="register--form--label" htmlFor="lastName">Last name</label>
             <input id="lastName" className="register--input--text" type="text"></input>
             <div className="register--input--container">
 
