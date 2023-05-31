@@ -1,0 +1,6 @@
+- fix musclegroup component layout, not alligned perfectly
+- sample exercises
+- load more exercises button
+
+
+done: 
