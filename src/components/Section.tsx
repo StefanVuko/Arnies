@@ -41,13 +41,7 @@ function RenderText(props: any) {
     <div className="section--info--container">
       <div className="section--text--container">
         <div className="section--text">
-          <p>{props.text1}</p>
-        </div>
-        <div className="section--text">
-          <p>{props.text2}</p>
-        </div>
-        <div className="section--text">
-          <p>{props.text3}</p>
+          <p>{props.text1}. {props.text2}. {props.text3}</p>
         </div>
       </div>
       <div className="section--button--container">

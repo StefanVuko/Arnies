@@ -2,6 +2,7 @@
   width: 100%;
   height: 100%;
   display: flex;
+  padding: 50px 0px;
   align-items:start;
   justify-content: center;
   flex-wrap: wrap;
@@ -82,4 +83,74 @@
   width: 100%;
   height: 100%;
   border-radius: 3px;
+}
+
+.exercise--section {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.exercise--container {
+  width: 500px;
+  height: 300px;
+  border: 1px solid black;
+  background-color: #DBE0D5;
+  position: relative;
+}
+
+.exercise--name--container {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 80%;
+  height: 40%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.exercise--image--container {
+  width: 20%;
+  height: 100%;
+}
+
+.exercise--name {
+  max-width: 20ch;
+  color: white;
+  font-size: 40px;
+}
+
+.exercise--info--p {
+  margin: 0px;
+  color: rgb(239, 157, 157);
+  font-size: 30px;
+}
+
+.exercise--info--span {
+  color: gray;
+  font-size: 1rem;
+}
+
+.exercise--info--container {
+  width: 80%;
+  height: 60%;
+  text-align: left;
+  position: absolute;
+  right: 0px;
+  top: 40%;
+}
+
+.exercise--image {
+  position: absolute;
+  top: 25%;
+  left: -15%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50px;
+  flex-shrink: 0;
+  border: 1px solid black;
 }

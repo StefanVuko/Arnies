@@ -1,6 +1,3 @@
-- fix musclegroup component layout, not alligned perfectly
-- sample exercises
-- load more exercises button
-
-
-done: 
+todo:
+- create new section for exercises
+- animation for about page on image switch

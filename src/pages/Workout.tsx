@@ -1,8 +1,8 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Musclegroup from "../components/Musclegroup";
-import Section from "../components/Section";
 import { useState } from "react";
+import Exercise from "../components/Exercise";
 
 function Workout() {
 
@@ -65,20 +65,48 @@ function Workout() {
     }
   ]
 
-  const [sectionComp, setSectionComp] = useState("")
+  const [showExercise, setShowExercise] = useState(false)
+  const [exerciseData, setExerciseData] = useState(
+    [{
+      "bodyPart": "",
+      "id": "",
+      "target": "",
+      "name": "",
+      "equipment": "",
+      "gifUrl": ""
 
-  function handleClick(event: any) {
-    {
-      console.log(event.target.textContent)
-      window.scrollTo(0, 0);
-    }
-    setSectionComp("yes")
+    }]);
+
+  const getExercise = async (clickedExercise: string) => {
+    fetch(`http://localhost:5000/getExercise?name=${clickedExercise}`)
+      .then(resp => resp.json())
+      .then(resp => {
+        setExerciseData(JSON.parse(resp))
+        setShowExercise(true)
+      })
+  }
+
+  async function handleClick(event: any) {
+    const clickedExercise = event.target.textContent.toLowerCase()
+    getExercise(clickedExercise)
+
+      .then(() => {
+        window.scrollTo(0, 0);
+      })
   }
 
   return (
     <>
       <Navbar />
-      {sectionComp ? <Section></Section> : null}
+      {showExercise && <Exercise
+        bodyPart={exerciseData?.[0].bodyPart}
+        id={exerciseData?.[0].id}
+        target={exerciseData?.[0].target}
+        name={exerciseData?.[0].name}
+        equipment={exerciseData?.[0].equipment}
+        gifUrl={exerciseData?.[0].gifUrl}
+      >
+      </Exercise>}
       <div className="content--container workout--container">
 
         {bodyParts.map(({ part, img, exercise1, exercise2, exercise3, exercise4 }) => {

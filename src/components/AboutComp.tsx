@@ -1,3 +1,6 @@
+import { CSSTransition } from "react-transition-group"
+import "../styles/about.css"
+
 function AboutComp(props: any) {
   return (
     <>

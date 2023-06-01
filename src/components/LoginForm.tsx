@@ -10,9 +10,9 @@ function LoginForm() {
         </div>
         <div className="register--form--input">
           <form>
-            <label className="register--form--label" htmlFor="username">Username:</label>
+            <label className="register--form--label" htmlFor="username">Username</label>
             <input id="username" className="register--input--text" type="text"></input>
-            <label className="register--form--label" htmlFor="password">Password:</label>
+            <label className="register--form--label" htmlFor="password">Password</label>
             <input id="password" className="register--input--text" type="password"></input>
             <div className="register--input--container">
 
