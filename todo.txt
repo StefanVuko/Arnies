@@ -1,3 +1,5 @@
 todo:
 - create new section for exercises
 - animation for about page on image switch
+- calorie calculator on tracker
+- pog site for each recipes information YOOO

@@ -25,9 +25,7 @@ function About() {
   return (
     <>
       <Navbar />
-      <div className="content--container">
-        <AboutComp url={imageUrl}></AboutComp>
-      </div>
+      <AboutComp url={imageUrl}></AboutComp>
       <Footer />
     </>
   )

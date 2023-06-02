@@ -1,5 +1,6 @@
 .tracker--container {
   width: 100%;
+  margin-top:50px;
   height: 300px;
   display: flex;
   justify-content: center;
