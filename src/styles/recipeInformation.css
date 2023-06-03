@@ -40,11 +40,11 @@
   margin-bottom: 8px;
 }
 
-.rcp--protein--container {
+#rcp--protein--container {
   height: 100%;
   width: 50%;
   border-radius: 4px;
-  animation: fillAnimationProt 2s ease;
+  /*animation: fillAnimationFats 2s ease;*/
   background-color: lightcoral;
 }
 
@@ -57,12 +57,12 @@
   }
 }
 
-.rcp--carbs--container {
+#rcp--carbs--container {
   height: 100%;
   width: 20%;
   border-radius: 4px;
   background-color: lightblue;
-  animation: fillAnimationCarbs 2s ease;
+  /*animation: fillAnimationFats 2s ease;*/
 }
 
 @keyframes fillAnimationCarbs {
@@ -83,12 +83,12 @@
   }
 }
 
-.rcp--fats--container {
+#rcp--fats--container {
   height: 100%;
   width: 20%;
   border-radius: 4px;
   background-color: rgb(232, 218, 141);
-  animation: fillAnimationFats 2s ease;
+  /*animation: fillAnimationFats 2s ease;*/
 }
 
 .rcp--text {
@@ -102,6 +102,11 @@
 
 .rcp--title {
   margin-top: 25px;
+  margin-bottom: 0px;
+}
+
+.rcp--info--text {
+  margin: 6px 0px;
 }
 
 .rcp--description--title {

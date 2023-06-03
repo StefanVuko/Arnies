@@ -58,4 +58,17 @@ app.get("/getCuisine", async (req, res) => {
   }
 })
 
+app.get("/getRecipeInformation", async (req, res) => {
+  const id = req.query.id
+  const url = `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=${apiKeyFood}`
+
+  try {
+    const response = await fetch(url);
+    const result = await response.text();
+    res.json(result)
+  } catch (error) {
+    console.error(error);
+  }
+})
+
 app.listen(port, () => console.log(`Listening on port ${port}`));

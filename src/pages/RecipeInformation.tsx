@@ -1,9 +1,13 @@
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import RecipeDetailed from "../components/RecipeDetailed";
+import { recipeData } from "../data/recipeDetailed";
 
 function RecipeInformation() {
+
+  const [data, setData] = useState(recipeData)
+  const [hasReceivedData, setHasReceivedData] = useState(false)
 
   function getId() {
     const url = window.location.href
@@ -15,10 +19,27 @@ function RecipeInformation() {
     return id
   }
 
+  function removeTags(text: string) {
+    let cleanText
+    if (text !== undefined)
+      cleanText = text.replace(/<.*?>/g, '')
+
+    return cleanText
+  }
+
+  const getRecipeData = async (id: string) => {
+    fetch(`http://localhost:5000/getRecipeInformation?id=${id}`)
+      .then(resp => resp.json())
+      .then(resp => {
+        setData(JSON.parse(resp))
+        setHasReceivedData(true)
+      })
+  }
+
   useEffect(() => {
     const id = getId()
-    console.log(id)
-  })
+    getRecipeData(id ? id : "")
+  }, [])
 
   return (
     <>
@@ -29,7 +50,15 @@ function RecipeInformation() {
           <img src="./src/resources/images/bg2.png" className="nutr--image2"></img>
           <img src="./src/resources/images/bg3.jpg" className="nutr--image3"></img>
         </div>
-        <RecipeDetailed />
+        {hasReceivedData && <RecipeDetailed
+          price={data.pricePerServing}
+          title={data.title}
+          url={data.spoonacularSourceUrl}
+          img={data.image}
+          description={removeTags(data.summary)}
+          nutrients={data.nutrition}
+          numberOfIngredients={data.extendedIngredients.length}
+        />}
       </div>
       <Footer />
     </>
