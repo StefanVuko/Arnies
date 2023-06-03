@@ -14,7 +14,6 @@ function Navbar() {
       <div className="navbar--right">
         <ul>
           <li className="navbar--item"><a href="/login">Login </a></li>
-          <li className="navbar--item"><a href="/register">Registration </a></li>
           <li className="navbar--item"><a href="/about">About </a></li>
         </ul>
       </div>

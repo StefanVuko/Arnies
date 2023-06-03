@@ -7,6 +7,9 @@ function Register() {
     <>
       <Navbar />
       <div className="content--container">
+        <div className="register--header--container">
+          <p className="register--text--head">“You have to remember something: Everybody pities the weak; jealousy you have to earn.” </p>
+        </div>
         <RegisterForm />
       </div>
       <Footer />

@@ -1,9 +1,6 @@
 function RegisterForm() {
   return (
     <div className="register--content">
-      <div className="register--form--text">
-        <p>“You have to remember something: Everybody pities the weak; jealousy you have to earn.” </p>
-      </div>
       <div className="register--form">
         <div className="register--title">
           <h1 className="register--title--h1">Arnie's</h1>
