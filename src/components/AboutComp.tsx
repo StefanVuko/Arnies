@@ -1,7 +1,21 @@
-import { CSSTransition } from "react-transition-group"
+import { useState, useEffect } from "react"
 import "../styles/about.css"
 
-function AboutComp(props: any) {
+function AboutComp() {
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const images = ["./src/resources/images/about1.jpg", "./src/resources/images/about2.jpg", "./src/resources/images/about3.jpg"]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [])
+
   return (
     <>
       <div className="about--info--container">
@@ -15,7 +29,11 @@ function AboutComp(props: any) {
         </p>
       </div>
       <div className="about--image--container">
-        <img className="about--image" src={props.url}></img>
+        <img
+          id="about--image"
+          src={images[currentImageIndex]}
+        >
+        </img>
         <p className="about--image--text">Start working out now!</p>
       </div>
     </>

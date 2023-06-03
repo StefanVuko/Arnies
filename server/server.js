@@ -19,6 +19,8 @@ const options = {
   }
 }
 
+const apiKeyFood = "6d3d041bbeb749a5b3f6c979b0be454d"
+
 app.get("/getBodyParts", async (req, res) => {
   const url = 'https://exercisedb.p.rapidapi.com/exercises/bodyPartList';
   try {
@@ -36,6 +38,19 @@ app.get("/getExercise", async (req, res) => {
 
   try {
     const response = await fetch(url, options);
+    const result = await response.text();
+    res.json(result)
+  } catch (error) {
+    console.error(error);
+  }
+})
+
+app.get("/getCuisine", async (req, res) => {
+  const cuisine = req.query.cuisine
+  const url = `https://api.spoonacular.com/recipes/complexSearch?cuisine=${cuisine}&number=10&apiKey=${apiKeyFood}`
+
+  try {
+    const response = await fetch(url);
     const result = await response.text();
     res.json(result)
   } catch (error) {

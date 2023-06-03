@@ -1,0 +1,122 @@
+.rcp--content--container {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+.rcp--rcp--container {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  flex-wrap: wrap;
+}
+
+.rcp--image--container {
+  width: 40%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rcp--info--container {
+  width: 60%;
+  height: 50%;
+}
+
+.rcp--image {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.rcp--nutrient--container {
+  height: 20px;
+  width: 80%;
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.rcp--protein--container {
+  height: 100%;
+  width: 50%;
+  border-radius: 4px;
+  animation: fillAnimationProt 2s ease;
+  background-color: lightcoral;
+}
+
+@keyframes fillAnimationProt {
+  from {
+    width: 0;
+  }
+  to {
+    width: 50%;
+  }
+}
+
+.rcp--carbs--container {
+  height: 100%;
+  width: 20%;
+  border-radius: 4px;
+  background-color: lightblue;
+  animation: fillAnimationCarbs 2s ease;
+}
+
+@keyframes fillAnimationCarbs {
+  from {
+    width: 0;
+  }
+  to {
+    width: 20%;
+  }
+}
+
+@keyframes fillAnimationFats {
+  from {
+    width: 0;
+  }
+  to {
+    width: 20%;
+  }
+}
+
+.rcp--fats--container {
+  height: 100%;
+  width: 20%;
+  border-radius: 4px;
+  background-color: rgb(232, 218, 141);
+  animation: fillAnimationFats 2s ease;
+}
+
+.rcp--text {
+  color: gray;
+}
+
+.rcp--nutrient--value {
+  color: white;
+  padding-left: 5px;
+}
+
+.rcp--title {
+  margin-top: 25px;
+}
+
+.rcp--description--title {
+  color: gray;
+  margin: 10px 10px;
+}
+
+.rcp--description--text {
+  margin: 10px 10px;
+}
+
+.rcp--description--container {
+  max-width: 75ch;
+  border-top: 1px solid gray;
+  height: 50%;
+  overflow: scroll;
+}
+

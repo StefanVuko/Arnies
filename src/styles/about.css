@@ -23,13 +23,9 @@
   margin: 0px 30px;
 }
 
-.about--image {
+#about--image {
   width: 100%;
-  height: auto;
   display: flex;
-  -webkit-transition: all .3s ease-in-out;
-  -moz-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
 }
 
 .about--image--text {
@@ -41,6 +37,7 @@
   color:white;
   font-size: 4rem;
   align-self: center;
+  text-align: center;
 }
 
 .fade-enter {

@@ -6,6 +6,7 @@ import Register from "./pages/Register"
 import About from "./pages/About"
 import Nutrition from "./pages/Nutrition"
 import Tracker from "./pages/Tracker"
+import RecipeInformation from "./pages/RecipeInformation"
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/nutrition" element={<Nutrition></Nutrition>}></Route>
         <Route path="/tracker" element={<Tracker></Tracker>}></Route>
         <Route path="/workout" element={<Workout></Workout>}></Route>
+        <Route path="/recipeInformation" element={<RecipeInformation></RecipeInformation>}></Route>
       </Routes>
     </>
   )
