@@ -6,8 +6,10 @@ Using
 
 - React + React Router 6 FE
 - Express BE
-- CSS Libary Tailwind
-- MongoDB (if needed?)
+- prisma db client
+- sqlite (if needed?)
+- session management????
 
 "npm run dev" to start server
-/ or /home to get to the mainpage
+
+[![CodeFactor](https://www.codefactor.io/repository/github/stefanvuko/arnies/badge/main)](https://www.codefactor.io/repository/github/stefanvuko/arnies/overview/main)
