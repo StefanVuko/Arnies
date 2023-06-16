@@ -1,20 +1,27 @@
 import { AiOutlineHome } from "react-icons/ai"
+import { useContext } from "react"
+import { AuthContext } from "../contexts/AuthContext"
+import { Link } from "react-router-dom"
 
 function Navbar() {
+
+  //const { isLoggedIn } = useContext(AuthContext)
+  const { isLoggedIn } = useContext(AuthContext)
+
   return (
     <nav>
       <div className="navbar--left">
         <ul>
-          <li className="navbar--item"><a href="/"><AiOutlineHome></AiOutlineHome></a></li>
-          <li className="navbar--item"><a href="/workout">WorkOUT </a></li>
-          <li className="navbar--item"><a href="/nutrition">Nutriti Tool </a></li>
-          <li className="navbar--item"><a href="/tracker">Tracker </a></li>
+          <li className="navbar--item"><Link to="/"><AiOutlineHome></AiOutlineHome></Link></li>
+          <li className="navbar--item"><Link to="/workout">WorkOUT </Link></li>
+          <li className="navbar--item"><Link to="/nutrition">Nutriti Tool </Link></li>
+          <li className="navbar--item"><Link to="/tracker">Tracker </Link></li>
         </ul>
       </div>
       <div className="navbar--right">
         <ul>
-          <li className="navbar--item"><a href="/login">Login </a></li>
-          <li className="navbar--item"><a href="/about">About </a></li>
+          <li className="navbar--item"><Link to="/login">{isLoggedIn ? "Logout" : "Login"}</Link></li>
+          <li className="navbar--item"><Link to="/about">About </Link></li>
         </ul>
       </div>
     </nav>

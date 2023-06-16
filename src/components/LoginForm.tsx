@@ -1,4 +1,11 @@
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+
+
 function LoginForm() {
+
+  //const x = useContext(AuthContext)
+  const { setIsLoggedIn } = useContext(AuthContext)
 
   function checkIfValidInput() {
     let isValidInput = false;
@@ -45,7 +52,8 @@ function LoginForm() {
 
   function checkResponse(response: number) {
     if (response === 200) {
-      window.location.href = "/home"
+      //x.login()
+      setIsLoggedIn(true)
     }
     if (response === 401) {
       alert("User not found or wrong password!")
