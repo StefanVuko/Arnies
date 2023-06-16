@@ -1,4 +1,57 @@
 function LoginForm() {
+
+  function checkIfValidInput() {
+    let isValidInput = false;
+
+    (document.getElementById("username") as HTMLInputElement).value &&
+      (document.getElementById("password") as HTMLInputElement).value ?
+      isValidInput = true : isValidInput = false;
+
+    return isValidInput
+  }
+
+  function submitLogin() {
+
+    if (!checkIfValidInput()) {
+      const elements = Array.from(document.getElementsByClassName("register--input--text") as HTMLCollectionOf<HTMLElement>)
+      elements.forEach(element => {
+        if (!(element as HTMLInputElement).value) {
+          element.style.border = "1px solid red";
+          (element as HTMLInputElement).placeholder = `Please input a ${element.id}`
+        }
+        else {
+          element.style.border = "none";
+        }
+      });
+      return;
+    }
+
+    const username = (document.getElementById("username") as HTMLInputElement).value
+    const password = (document.getElementById("password") as HTMLInputElement).value
+    const user = { username, password }
+
+    fetch("http://localhost:5000/login",
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
+      .then(resp => {
+        checkResponse(resp.status)
+      })
+  }
+
+  function checkResponse(response: number) {
+    if (response === 200) {
+      window.location.href = "/home"
+    }
+    if (response === 401) {
+      alert("User not found or wrong password!")
+    }
+  }
+
   return (
     <div className="register--content">
       <div className="register--form--text">
@@ -15,7 +68,11 @@ function LoginForm() {
             <input id="password" className="register--input--text" type="password"></input>
             <p className="register--noUserText"><a className="register--noUserText" href="/register">Not a user? Register now!</a></p>
           </form>
-          <input className="register--input--button" type="submit" value="Login"></input>
+          <input className="register--input--button"
+            type="submit"
+            value="Login"
+            onClick={submitLogin}>
+          </input>
         </div>
       </div>
     </div>

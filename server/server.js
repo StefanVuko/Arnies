@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require('cors')
+const userData = require("./data/user")
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -20,6 +21,36 @@ const options = {
 }
 
 const apiKeyFood = "6d3d041bbeb749a5b3f6c979b0be454d"
+
+app.post("/login", async (req, res) => {
+  const { username } = req.body
+  const { password } = req.body
+
+  let isLoggedIn = false;
+
+  Object.values(userData).forEach(user => {
+    if (user.username === username && user.password === password) {
+      isLoggedIn = true;
+      return;
+    }
+  });
+
+  isLoggedIn ? res.sendStatus(200) : res.sendStatus(401)
+})
+
+app.post("/register", async (req, res) => {
+  const { username } = req.body
+  const { password } = req.body
+  const { email } = req.body
+  const { firstName } = req.body
+  const { lastName } = req.body
+
+  const newUser = { username, password, email, firstName, lastName }
+
+  userData[username] = newUser
+  res.sendStatus(200)
+  //possibly check if user already exists
+})
 
 app.get("/getBodyParts", async (req, res) => {
   const url = 'https://exercisedb.p.rapidapi.com/exercises/bodyPartList';

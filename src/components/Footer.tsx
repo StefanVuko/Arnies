@@ -11,7 +11,7 @@ function Footer() {
       <div className="footer--icons">
         <ul className="footer--iconlist">
           <li className="footer--item"><a href="https://github.com/StefanVuko/Arnies"><AiFillGithub /></a></li>
-          <li className="footer--item"><a href="https://portal.fh-campuswien.ac.at/studierende/aktuell.asp"><FaUniversity /></a></li>
+          <li className="footer--item"><a href="https://www.fh-campuswien.ac.at"><FaUniversity /></a></li>
           <li className="footer--item"><a href="mailto:stefanvuko16@outlook.de"><AiFillMail /></a></li>
         </ul>
       </div>

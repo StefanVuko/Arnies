@@ -1,4 +1,63 @@
 function RegisterForm() {
+
+  function checkIfValidInput() {
+    let isValidInput = false;
+
+    (document.getElementById("username") as HTMLInputElement).value &&
+      (document.getElementById("password") as HTMLInputElement).value &&
+      (document.getElementById("firstName") as HTMLInputElement).value &&
+      (document.getElementById("lastName") as HTMLInputElement).value &&
+      (document.getElementById("email") as HTMLInputElement).value ?
+      isValidInput = true : isValidInput = false;
+
+    return isValidInput
+  }
+
+  function submitRegister() {
+
+    if (!checkIfValidInput()) {
+      const elements = Array.from(document.getElementsByClassName("register--input--text") as HTMLCollectionOf<HTMLElement>)
+      elements.forEach(element => {
+        if (!(element as HTMLInputElement).value) {
+          element.style.border = "1px solid red";
+          (element as HTMLInputElement).placeholder = `Please input a ${element.id}`
+        }
+        else {
+          element.style.border = "none";
+        }
+      });
+      return;
+    }
+
+    const username = (document.getElementById("username") as HTMLInputElement).value
+    const password = (document.getElementById("password") as HTMLInputElement).value
+    const firstName = (document.getElementById("firstName") as HTMLInputElement).value
+    const lastName = (document.getElementById("lastName") as HTMLInputElement).value
+    const email = (document.getElementById("email") as HTMLInputElement).value
+    const newUser = { username, password, firstName, lastName, email }
+
+    fetch("http://localhost:5000/register",
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUser)
+      })
+      .then(resp => {
+        checkResponse(resp.status)
+      })
+  }
+
+  function checkResponse(response: number) {
+    if (response === 200) {
+      window.location.href = "/home"
+    }
+    if (response === 401) {
+      alert("Something went wrong!")
+    }
+  }
+
   return (
     <div className="register--content">
       <div className="register--form">
@@ -22,7 +81,12 @@ function RegisterForm() {
             </div>
 
           </form>
-          <input className="register--input--button" type="submit" value="Register"></input>
+          <input
+            className="register--input--button"
+            type="submit"
+            value="Register"
+            onClick={submitRegister}>
+          </input>
         </div>
 
       </div>

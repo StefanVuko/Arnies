@@ -87,6 +87,11 @@ input {
 
 .register--noUserText {
   text-align: center;
+  transition: color 0.5s ease;
+}
+
+.register--noUserText:hover {
+  color: white
 }
 
 form {
