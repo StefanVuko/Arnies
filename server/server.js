@@ -44,12 +44,17 @@ app.post("/register", async (req, res) => {
   const { email } = req.body
   const { firstName } = req.body
   const { lastName } = req.body
-
+  console.log(userData[username])
   const newUser = { username, password, email, firstName, lastName }
+
+  //If user already exists send error
+  if (userData[username]) {
+    res.sendStatus(401)
+    return
+  }
 
   userData[username] = newUser
   res.sendStatus(200)
-  //possibly check if user already exists
 })
 
 app.get("/getBodyParts", async (req, res) => {

@@ -54,7 +54,7 @@ function RegisterForm() {
       window.location.href = "/home"
     }
     if (response === 401) {
-      alert("Something went wrong!")
+      alert("User already exists!")
     }
   }
 
