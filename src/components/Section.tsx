@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function Section(props: any) {
   return (
     <section>
@@ -28,6 +30,10 @@ function Section(props: any) {
   )
 }
 
+function LinkTo(link: string) {
+  <Link to="/login"></Link>
+}
+
 function RenderImage(props: any) {
   return (
     <div className="section--image--container">
@@ -45,7 +51,9 @@ function RenderText(props: any) {
         </div>
       </div>
       <div className="section--button--container">
-        <button onClick={() => { location.href = `http://localhost:5173/${props.buttonUrl}` }} className="section--button">{props.buttonTxt}</button>
+        <Link className="section--button" to={`/${props.buttonUrl}`}>
+          <button className="section--button">{props.buttonTxt}</button>
+        </Link>
       </div>
     </div>
   )

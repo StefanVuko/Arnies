@@ -4,3 +4,6 @@ todo:
 - calorie calculator on tracker
 - pog site for each recipes information YOOO
 - recipe props include stars
+
+- fix logout console error 
+- fix a hierarchy console error when logging in

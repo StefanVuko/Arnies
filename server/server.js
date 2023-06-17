@@ -45,7 +45,6 @@ app.post("/register", async (req, res) => {
   const { email } = req.body
   const { firstName } = req.body
   const { lastName } = req.body
-  console.log(userData[username])
   const newUser = { username, password, email, firstName, lastName }
 
   let favoriteRecipes = []
@@ -59,7 +58,7 @@ app.post("/register", async (req, res) => {
   }
 
   userData[username] = newUser
-  userFavorites[username] = new newUserFavorites
+  userFavorites[username] = newUserFavorites
   res.sendStatus(200)
 })
 
@@ -123,6 +122,7 @@ app.post("/addFavoriteRecipe", async (req, res) => {
   const obj = { id, title, img, stars }
 
   userFavorites[username].favoriteRecipes.push(obj)
+  console.log(userFavorites[username])
   res.sendStatus(200)
 })
 
@@ -138,6 +138,36 @@ app.post("/addFavoriteExercise", async (req, res) => {
   const obj = { id, img, name, equipment, bodyPart, target }
 
   userFavorites[username].favoriteWorkouts.push(obj)
+  res.sendStatus(200)
+})
+
+app.get("/getUserInfo/:username", async (req, res) => {
+  const username = req.params.username
+
+  const data = userData[username]
+
+  res.json(data)
+})
+
+app.put("/setUserInfo/:username", async (req, res) => {
+  const oldUsername = req.params.username
+  const newUserData = req.body
+
+  /*console.log(oldUsername)
+  console.log(newUserData.username)*/
+
+  const oldFavorites = userFavorites[oldUsername]
+
+  delete userData[oldUsername]
+  userData[newUserData.username] = newUserData
+  delete userFavorites[oldUsername]
+  userFavorites[newUserData.username] = oldFavorites
+
+  /*console.log(userData[oldUsername])
+  console.log(userFavorites[oldUsername])
+  console.log(userData[newUserData.username])
+  console.log(userFavorites[newUserData.username])*/
+
   res.sendStatus(200)
 })
 

@@ -3,11 +3,48 @@ import { AuthContext } from "../contexts/AuthContext"
 
 function SettingsComp() {
 
-  const { username } = useContext(AuthContext)
+  const { username, setUsername } = useContext(AuthContext)
 
   useEffect(() => {
+    fetch(`http://localhost:5000/getUserInfo/${username}`)
+      .then(resp => resp.json())
+      .then(resp => {
+        (document.getElementById("email") as HTMLInputElement).value = resp.email;
+        (document.getElementById("password") as HTMLInputElement).value = resp.password;
+        (document.getElementById("username") as HTMLInputElement).value = resp.username;
+        (document.getElementById("firstName") as HTMLInputElement).value = resp.lastName;
+        (document.getElementById("lastName") as HTMLInputElement).value = resp.firstName;
+      })
+  }, [username])
 
-  }, [])
+  function handleClick() {
+    const newUserData = {
+      email: (document.getElementById("email") as HTMLInputElement).value,
+      password: (document.getElementById("password") as HTMLInputElement).value,
+      username: (document.getElementById("username") as HTMLInputElement).value,
+      lastName: (document.getElementById("firstName") as HTMLInputElement).value,
+      firstName: (document.getElementById("lastName") as HTMLInputElement).value
+    }
+
+    fetch(`http://localhost:5000/setUserInfo/${username}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUserData)
+      })
+      .then(resp => {
+        checkResponse(resp.status)
+      })
+  }
+
+  function checkResponse(response: number) {
+    if (response === 200) {
+      setUsername((document.getElementById("username") as HTMLInputElement).value)
+      console.log("success!")
+    }
+  }
 
   return (
     <div className="register--content">
@@ -33,12 +70,12 @@ function SettingsComp() {
 
           </form>
           <input
+            onClick={handleClick}
             className="register--input--button"
             type="submit"
             value="Update">
           </input>
         </div>
-
       </div>
     </div>
   )
