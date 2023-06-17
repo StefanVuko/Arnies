@@ -112,6 +112,7 @@ function Workout() {
         {bodyParts.map(({ part, img, exercise1, exercise2, exercise3, exercise4 }) => {
           return (
             <Musclegroup
+              key={part}
               group={part}
               img={img}
               exercise1={exercise1}

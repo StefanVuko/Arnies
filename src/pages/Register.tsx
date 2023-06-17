@@ -1,8 +1,18 @@
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import RegisterForm from "../components/RegisterForm"
+import { useContext } from "react"
+import { AuthContext } from "../contexts/AuthContext"
+import { Navigate } from "react-router-dom"
 
 function Register() {
+
+  const { isLoggedIn } = useContext(AuthContext)
+
+  if (isLoggedIn) {
+    return <Navigate to="/" />
+  }
+
   return (
     <>
       <Navbar />

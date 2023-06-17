@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+
 function RegisterForm() {
+
+  const { setIsLoggedIn, setUsername } = useContext(AuthContext)
 
   function checkIfValidInput() {
     let isValidInput = false;
@@ -51,7 +56,8 @@ function RegisterForm() {
 
   function checkResponse(response: number) {
     if (response === 200) {
-      window.location.href = "/home"
+      setUsername((document.getElementById("username") as HTMLInputElement).value)
+      setIsLoggedIn(true)
     }
     if (response === 401) {
       alert("User already exists!")

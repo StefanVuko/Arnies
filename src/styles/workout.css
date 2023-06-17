@@ -122,6 +122,7 @@
   max-width: 20ch;
   color: white;
   font-size: 40px;
+  cursor: pointer;
 }
 
 .exercise--info--p {

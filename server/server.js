@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require('cors')
 const userData = require("./data/user")
+const userFavorites = require("./data/userFavorites")
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -47,6 +48,10 @@ app.post("/register", async (req, res) => {
   console.log(userData[username])
   const newUser = { username, password, email, firstName, lastName }
 
+  let favoriteRecipes = []
+  let favoriteWorkouts = []
+  const newUserFavorites = { favoriteRecipes, favoriteWorkouts }
+
   //If user already exists send error
   if (userData[username]) {
     res.sendStatus(401)
@@ -54,6 +59,7 @@ app.post("/register", async (req, res) => {
   }
 
   userData[username] = newUser
+  userFavorites[username] = new newUserFavorites
   res.sendStatus(200)
 })
 
@@ -105,6 +111,34 @@ app.get("/getRecipeInformation", async (req, res) => {
   } catch (error) {
     console.error(error);
   }
+})
+
+app.post("/addFavoriteRecipe", async (req, res) => {
+  const { username } = req.body
+  const { id } = req.body
+  const { title } = req.body
+  const { img } = req.body
+  const { stars } = req.body
+
+  const obj = { id, title, img, stars }
+
+  userFavorites[username].favoriteRecipes.push(obj)
+  res.sendStatus(200)
+})
+
+app.post("/addFavoriteExercise", async (req, res) => {
+  const { username } = req.body
+  const { id } = req.body
+  const { name } = req.body
+  const { img } = req.body
+  const { equipment } = req.body
+  const { bodyPart } = req.body
+  const { target } = req.body
+
+  const obj = { id, img, name, equipment, bodyPart, target }
+
+  userFavorites[username].favoriteWorkouts.push(obj)
+  res.sendStatus(200)
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

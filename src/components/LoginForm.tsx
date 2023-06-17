@@ -5,7 +5,7 @@ import { AuthContext } from "../contexts/AuthContext";
 function LoginForm() {
 
   //const x = useContext(AuthContext)
-  const { setIsLoggedIn } = useContext(AuthContext)
+  const { setIsLoggedIn, setUsername } = useContext(AuthContext)
 
   function checkIfValidInput() {
     let isValidInput = false;
@@ -52,7 +52,7 @@ function LoginForm() {
 
   function checkResponse(response: number) {
     if (response === 200) {
-      //x.login()
+      setUsername((document.getElementById("username") as HTMLInputElement).value)
       setIsLoggedIn(true)
     }
     if (response === 401) {
