@@ -20,6 +20,20 @@ function Exercise(props: any) {
       })
   }
 
+  function removeFromFavorites(obj: Object) {
+    fetch("http://localhost:5000/removeFavoriteExercise",
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(obj)
+      })
+      .then(resp => {
+        checkResponse(resp.status)
+      })
+  }
+
   function checkResponse(response: number) {
     if (response === 200) {
       console.log("Success!")
@@ -48,7 +62,7 @@ function Exercise(props: any) {
                   bodyPart: props.bodyPart,
                   target: props.target
                 }
-                addToFavorites(obj)
+                props.isFavorite ? removeFromFavorites(obj) : addToFavorites(obj)
               }}
               className="exercise--name">{props.name}
             </h2>

@@ -131,3 +131,13 @@
   opacity: 50%;
   cursor: pointer;
 }
+
+.recipe--favorites {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.favorite--header, .favorite--text {
+  text-align: center;
+}

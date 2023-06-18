@@ -73,6 +73,7 @@ function Nutrition() {
                 img={image}
                 title={title}
                 stars={stars}
+                isFavorite={false}
               />
             )
           })}

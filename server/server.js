@@ -126,6 +126,21 @@ app.post("/addFavoriteRecipe", async (req, res) => {
   res.sendStatus(200)
 })
 
+app.delete("/removeFavoriteRecipe", async (req, res) => {
+  const { username } = req.body
+  const { id } = req.body
+  const { title } = req.body
+  const { img } = req.body
+  const { stars } = req.body
+
+  const obj = { id, title, img, stars }
+
+  const index = userFavorites[username].favoriteRecipes.indexOf(obj)
+  userFavorites[username].favoriteRecipes.splice(index, 1)
+  console.log(userFavorites[username])
+  res.sendStatus(200)
+})
+
 app.post("/addFavoriteExercise", async (req, res) => {
   const { username } = req.body
   const { id } = req.body
@@ -138,6 +153,24 @@ app.post("/addFavoriteExercise", async (req, res) => {
   const obj = { id, img, name, equipment, bodyPart, target }
 
   userFavorites[username].favoriteWorkouts.push(obj)
+  res.sendStatus(200)
+})
+
+
+app.delete("/removeFavoriteExercise", async (req, res) => {
+  const { username } = req.body
+  const { id } = req.body
+  const { name } = req.body
+  const { img } = req.body
+  const { equipment } = req.body
+  const { bodyPart } = req.body
+  const { target } = req.body
+
+  const obj = { id, img, name, equipment, bodyPart, target }
+
+  const index = userFavorites[username].favoriteWorkouts.indexOf(obj)
+
+  userFavorites[username].favoriteWorkouts.splice(index, 1)
   res.sendStatus(200)
 })
 
@@ -169,6 +202,12 @@ app.put("/setUserInfo/:username", async (req, res) => {
   console.log(userFavorites[newUserData.username])*/
 
   res.sendStatus(200)
+})
+
+app.get("/getUserFavorites/:username", async (req, res) => {
+  const username = req.params.username
+
+  res.json(userFavorites[username])
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

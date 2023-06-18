@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { AuthContext } from "../contexts/AuthContext"
+import { Link } from "react-router-dom"
 
 function Recipe(props: any) {
 
@@ -24,6 +25,20 @@ function Recipe(props: any) {
       })
   }
 
+  function removeFromFavorites(obj: Object) {
+    fetch("http://localhost:5000/removeFavoriteRecipe",
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(obj)
+      })
+      .then(resp => {
+        checkResponse(resp.status)
+      })
+  }
+
   function checkResponse(response: number) {
     if (response === 200) {
       console.log("Success!")
@@ -35,11 +50,12 @@ function Recipe(props: any) {
   return (
     <div className="recipe--container">
       <div className="recipe--image--container">
-        <img
-          onClick={() => location.href = `/recipeInformation?id=${props.id}`}
-          src={props.img}
-          className="recipe--image">
-        </img>
+        <Link to={`/recipeInformation?id=${props.id}`}>
+          <img
+            src={props.img}
+            className="recipe--image">
+          </img>
+        </Link>
       </div>
       <div className="recipe--info--container">
         <div className="recipe--name--container">
@@ -49,11 +65,11 @@ function Recipe(props: any) {
           <p className="recipe--stars">{starString}</p>
           <img
             onClick={() => {
-              const obj = { username: username, id: props.id, title: props.title, img: props.img, stars: starString }
-              addToFavorites(obj)
+              const obj = { username: username, id: props.id, title: props.title, img: props.img, stars: props.stars }
+              props.isFavorite ? removeFromFavorites(obj) : addToFavorites(obj)
             }}
             className="recipe--image--add"
-            src="./src/resources/images/add.png">
+            src={props.isFavorite ? "./src/resources/images/remove.png" : "./src/resources/images/add.png"}>
           </img>
         </div>
       </div>

@@ -21,7 +21,7 @@ function Navbar() {
       </div>
       <div className="navbar--right">
         <ul>
-          <li className="navbar--item"><Link to="/login">{isLoggedIn ? <UserDropdown /> : "Login"}</Link></li>
+          <li className="navbar--item">{isLoggedIn ? <UserDropdown /> : <Link to="/login">Login</Link>}</li>
           <li className="navbar--item"><Link to="/about">About </Link></li>
         </ul>
       </div>

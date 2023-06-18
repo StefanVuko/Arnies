@@ -105,6 +105,7 @@ function Workout() {
         name={exerciseData?.[0].name}
         equipment={exerciseData?.[0].equipment}
         gifUrl={exerciseData?.[0].gifUrl}
+        isFavorite={false}
       >
       </Exercise>}
       <div className="content--container workout--container">

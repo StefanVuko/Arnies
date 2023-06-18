@@ -11,6 +11,7 @@ import "./styles/nutrition.css";
 import "./styles/recipeInformation.css"
 import "./styles/userdropdown.css"
 import "./styles/settings.css"
+import "./styles/alert.css"
 import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
