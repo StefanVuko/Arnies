@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arnie's</title>
+  <script src="index.js"></script>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <form>
+    <h1>First endpoint</h1>
+    <label for="username">Username</label><br>
+    <input type="text" id="username"><br>
+    <label for="password">Password</label><br>
+    <input type="password" id="password"><br>
+  </form>
+  <button onclick="submitLogin()">Login</button>
+
+  <h1>Second endpoint</h1>
+  <button onclick="loadBodyParts()">Load Body Parts</button>
+
+  <h1>Third endpoint</h1>
+  <label for="cuisine">Cuisine</label><br>
+  <select id="cuisine">
+    <option value="german">German</option>
+    <option value="italian">Italian</option>
+    <option value="greek">Greek</option>
+  </select>
+  <button onclick="loadCuisine()">Load Cuisine</button>
+</body>
+
+</html>

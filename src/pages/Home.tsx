@@ -87,6 +87,7 @@ function Home() {
             buttonTxt={buttonTxt}
             buttonUrl={buttonUrl}
             isFlipped={isFlipped} />
+
         )
       })}
       <RegisterSection

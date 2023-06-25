@@ -13,7 +13,9 @@ function Section(props: any) {
               buttonTxt={props.buttonTxt}
               buttonUrl={props.buttonUrl}>
             </RenderText>
-            <RenderImage img={props.img}></RenderImage>
+            <RenderImage
+              img={props.img}>
+            </RenderImage>
           </>) : (
           <>
             <RenderImage img={props.img}></RenderImage>
@@ -34,7 +36,7 @@ function Section(props: any) {
 function RenderImage(props: any) {
   return (
     <div className="section--image--container">
-      <img className="section--image" src={`./src/resources/images/${props.img}`}></img>
+      <img alt="exercise picture" className="section--image" src={`./src/resources/images/${props.img}`}></img>
     </div>
   )
 }
