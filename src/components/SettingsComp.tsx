@@ -3,10 +3,16 @@ import { AuthContext } from "../contexts/AuthContext"
 
 function SettingsComp() {
 
-  const { username, setUsername } = useContext(AuthContext)
+  const { username, setUsername, jwt } = useContext(AuthContext)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/getUserInfo/${username}`)
+    fetch(`http://localhost:5000/getUserInfo`,
+      {
+        method: "GET",
+        headers: {
+          "Authorization": jwt ? jwt : ""
+        }
+      })
       .then(resp => resp.json())
       .then(resp => {
         (document.getElementById("email") as HTMLInputElement).value = resp.email;
@@ -26,11 +32,12 @@ function SettingsComp() {
       firstName: (document.getElementById("lastName") as HTMLInputElement).value
     }
 
-    fetch(`http://localhost:5000/setUserInfo/${username}`,
+    fetch(`http://localhost:5000/setUserInfo`,
       {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          "Authorization": jwt ? jwt : ""
         },
         body: JSON.stringify(newUserData)
       })
