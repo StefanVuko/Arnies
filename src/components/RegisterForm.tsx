@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import Cookies from "js-cookie";
+import Alert from "./Alert";
 
 function RegisterForm() {
 
-  const { setIsLoggedIn, setUsername, setJwt } = useContext(AuthContext)
+  const { setUsername, setJwt } = useContext(AuthContext)
 
   function checkIfValidInput() {
     let isValidInput = false;
@@ -71,7 +72,6 @@ function RegisterForm() {
     if (response === 200) {
       Cookies.set("jwtToken", accessToken)
       setUsername((document.getElementById("username") as HTMLInputElement).value)
-      setIsLoggedIn(true)
       setJwt(accessToken)
     }
     if (response === 401) {

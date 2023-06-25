@@ -7,9 +7,9 @@ import { Navigate } from "react-router-dom"
 
 function Register() {
 
-  const { isLoggedIn } = useContext(AuthContext)
+  const { jwt } = useContext(AuthContext)
 
-  if (isLoggedIn) {
+  if (jwt) {
     return <Navigate to="/" />
   }
 

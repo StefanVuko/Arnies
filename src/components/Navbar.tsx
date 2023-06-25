@@ -7,7 +7,7 @@ import UserDropdown from "./UserDropdown"
 function Navbar() {
 
   //const { isLoggedIn } = useContext(AuthContext)
-  const { isLoggedIn } = useContext(AuthContext)
+  const { jwt } = useContext(AuthContext)
 
   return (
     <nav>
@@ -21,7 +21,7 @@ function Navbar() {
       </div>
       <div className="navbar--right">
         <ul>
-          <li className="navbar--item">{isLoggedIn ? <UserDropdown /> : <Link to="/login">Login</Link>}</li>
+          <li className="navbar--item">{jwt ? <UserDropdown /> : <Link to="/login">Login</Link>}</li>
           <li className="navbar--item"><Link to="/about">About </Link></li>
         </ul>
       </div>

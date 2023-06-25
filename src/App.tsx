@@ -17,13 +17,12 @@ import Favorites from "./pages/Favorites"
 import Cookies from "js-cookie"
 
 function App() {
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [username, setUsername] = useState("")
   const [jwt, setJwt] = useState(Cookies.get("jwtToken"))
+  const [count, setCount] = useState(0)
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, username, setUsername, jwt, setJwt }}>
+    <AuthContext.Provider value={{ username, setUsername, jwt, setJwt, count, setCount }}>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/home" element={<Home></Home>}></Route>

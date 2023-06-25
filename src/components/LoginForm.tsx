@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 function LoginForm() {
 
   //const x = useContext(AuthContext)
-  const { setIsLoggedIn, setUsername, setJwt } = useContext(AuthContext)
+  const { setUsername, setJwt, setCount } = useContext(AuthContext)
 
   function checkIfValidInput() {
     let isValidInput = false;
@@ -67,8 +67,8 @@ function LoginForm() {
     if (response === 200) {
       Cookies.set("jwtToken", accessToken)
       setUsername((document.getElementById("username") as HTMLInputElement).value)
-      setIsLoggedIn(true)
       setJwt(accessToken)
+      setCount(1)
     }
     if (response === 401) {
       alert("User not found or wrong password!")

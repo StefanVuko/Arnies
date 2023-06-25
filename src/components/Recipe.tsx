@@ -1,10 +1,13 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { AuthContext } from "../contexts/AuthContext"
 import { Link } from "react-router-dom"
+import Alert from "./Alert"
 
 function Recipe(props: any) {
 
-  const { username, jwt } = useContext(AuthContext)
+  const { jwt } = useContext(AuthContext)
+  const [notification, setNotification] = useState("");
+  const [hasSucceeded, setHasSucceeded] = useState(false);
 
   let starString = ""
   for (let x = 0; x < props.stars; x++) {
@@ -17,7 +20,7 @@ function Recipe(props: any) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          "Authorization": jwt
+          "Authorization": jwt ? jwt : ""
         },
         body: JSON.stringify(obj)
       })
@@ -32,7 +35,7 @@ function Recipe(props: any) {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          "Authorization": jwt
+          "Authorization": jwt ? jwt : ""
         },
         body: JSON.stringify(obj)
       })
@@ -43,39 +46,51 @@ function Recipe(props: any) {
 
   function checkResponse(response: number) {
     if (response === 200) {
-      console.log("Success!")
+      setNotification("Successfully added / removed recipe to favorites");
+      setHasSucceeded(true)
+      setTimeout(() => {
+        setNotification("");
+      }, 2000);
     }
     //Check if food has been added already
   }
 
 
   return (
-    <div className="recipe--container">
-      <div className="recipe--image--container">
-        <Link to={`/recipeInformation?id=${props.id}`}>
-          <img
-            src={props.img}
-            className="recipe--image">
-          </img>
-        </Link>
-      </div>
-      <div className="recipe--info--container">
-        <div className="recipe--name--container">
-          <p className="recipe--name">{props.title}</p>
+    <>
+      {notification &&
+        <Alert
+          text={notification}
+          hasSucceeded={hasSucceeded}
+          onClose={() => setNotification("")}
+        />}
+      <div className="recipe--container">
+        <div className="recipe--image--container">
+          <Link to={`/recipeInformation?id=${props.id}`}>
+            <img
+              src={props.img}
+              className="recipe--image">
+            </img>
+          </Link>
         </div>
-        <div className="recipe--info--container2">
-          <p className="recipe--stars">{starString}</p>
-          <img
-            onClick={() => {
-              const obj = { id: props.id, title: props.title, img: props.img, stars: props.stars }
-              props.isFavorite ? removeFromFavorites(obj) : addToFavorites(obj)
-            }}
-            className="recipe--image--add"
-            src={props.isFavorite ? "./src/resources/images/remove.png" : "./src/resources/images/add.png"}>
-          </img>
+        <div className="recipe--info--container">
+          <div className="recipe--name--container">
+            <p className="recipe--name">{props.title}</p>
+          </div>
+          <div className="recipe--info--container2">
+            <p className="recipe--stars">{starString}</p>
+            <img
+              onClick={() => {
+                const obj = { id: props.id, title: props.title, img: props.img, stars: props.stars }
+                props.isFavorite ? removeFromFavorites(obj) : addToFavorites(obj)
+              }}
+              className="recipe--image--add"
+              src={props.isFavorite ? "./src/resources/images/remove.png" : "./src/resources/images/add.png"}>
+            </img>
+          </div>
         </div>
-      </div>
-    </div >
+      </div >
+    </>
   )
 }
 

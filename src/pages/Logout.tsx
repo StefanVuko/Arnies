@@ -1,11 +1,14 @@
 import { Navigate } from "react-router-dom"
 import { useContext } from "react"
 import { AuthContext } from "../contexts/AuthContext"
+import Cookies from "js-cookie"
 
 function Logout() {
-  const { setIsLoggedIn, setUsername } = useContext(AuthContext)
+  const { setJwt, setUsername, setCount } = useContext(AuthContext)
   setUsername("")
-  setIsLoggedIn(false)
+  setJwt("")
+  setCount(1)
+  Cookies.set("jwtToken", "")
 
   return <Navigate to="/" />
 }

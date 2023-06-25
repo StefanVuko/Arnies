@@ -30,9 +30,6 @@ function Section(props: any) {
   )
 }
 
-function LinkTo(link: string) {
-  <Link to="/login"></Link>
-}
 
 function RenderImage(props: any) {
   return (

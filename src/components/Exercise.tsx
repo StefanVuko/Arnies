@@ -1,10 +1,13 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { AuthContext } from "../contexts/AuthContext"
+import Alert from "./Alert";
 
 
 function Exercise(props: any) {
 
-  const { username, jwt } = useContext(AuthContext)
+  const { jwt } = useContext(AuthContext)
+  const [notification, setNotification] = useState("");
+  const [hasSucceeded, setHasSucceeded] = useState(false);
 
   function addToFavorites(obj: Object) {
     fetch("http://localhost:5000/addFavoriteExercise",
@@ -12,7 +15,7 @@ function Exercise(props: any) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          "Authorization": jwt
+          "Authorization": jwt ? jwt : ""
         },
         body: JSON.stringify(obj)
       })
@@ -27,7 +30,7 @@ function Exercise(props: any) {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          "Authorization": jwt
+          "Authorization": jwt ? jwt : ""
         },
         body: JSON.stringify(obj)
       })
@@ -38,12 +41,23 @@ function Exercise(props: any) {
 
   function checkResponse(response: number) {
     if (response === 200) {
-      console.log("Success!")
+      setNotification("Successfully added / removed exercise to favorites");
+      setHasSucceeded(true)
+      setTimeout(() => {
+        setNotification("");
+      }, 2000);
     }
     //Check if food has been added already
   }
+
   return (
     <>
+      {notification &&
+        <Alert
+          text={notification}
+          hasSucceeded={hasSucceeded}
+          onClose={() => setNotification("")}
+        />}
       <section className="exercise--section">
         <div className="exercise--container">
           <div className="exercise--image--container">

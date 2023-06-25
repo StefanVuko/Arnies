@@ -25,21 +25,21 @@ export function AuthProvider(props: any) {
 }*/
 
 interface IAuthContext {
-  isLoggedIn: boolean
-  setIsLoggedIn: Dispatch<SetStateAction<boolean>>
   username: string
   setUsername: Dispatch<SetStateAction<string>>
   jwt: string | undefined
   setJwt: Dispatch<SetStateAction<string | undefined>>
+  count: number
+  setCount: Dispatch<SetStateAction<number>>
 }
 
 import { createContext, SetStateAction, Dispatch } from "react";
 
 export const AuthContext = createContext<IAuthContext>({
-  isLoggedIn: false,
-  setIsLoggedIn: () => { },
   username: "",
   setUsername: () => { },
   jwt: "",
-  setJwt: () => { }
+  setJwt: () => { },
+  count: 0,
+  setCount: () => { }
 })

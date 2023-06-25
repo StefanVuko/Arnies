@@ -4,9 +4,9 @@ import { AuthContext } from "../contexts/AuthContext";
 
 function PrivateRoutes() {
 
-  const { isLoggedIn } = useContext(AuthContext)
+  const { jwt } = useContext(AuthContext)
   return (
-    isLoggedIn ? <Outlet /> : <Navigate to="/login" />
+    jwt ? <Outlet /> : <Navigate to="/login" />
   )
 }
 

@@ -39,6 +39,38 @@ const sections = [{
 ]
 
 function Home() {
+
+  /*function setNotif() {
+    if (count == 0 && jwt) {
+      setNotification("Successfully logged in")
+      setHasSucceeded(true)
+      setTimeout(() => {
+        setNotification("")
+        setCount(1)
+      }, 2000);
+    }
+
+    if (count == 1 && !jwt) {
+      setNotification("Successfully logged out")
+      setHasSucceeded(true)
+      setTimeout(() => {
+        setNotification("")
+      }, 2000);
+    }
+
+    if (count == 1 && jwt) {
+      setNotification("Successfully logged in")
+      setHasSucceeded(true)
+      setTimeout(() => {
+        setNotification("")
+      }, 2000);
+    }
+  }
+
+  useEffect(() => {
+    setNotif()
+  }, [])*/
+
   return (
     <>
       <Navbar></Navbar>
