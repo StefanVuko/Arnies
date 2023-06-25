@@ -27,9 +27,9 @@ function Nutrition() {
       <Navbar></Navbar>
       <div className="content--container">
         <div className="nutr--images">
-          <img src="./src/resources/images/bg1.jpg" className="nutr--image1"></img>
-          <img src="./src/resources/images/bg2.png" className="nutr--image2"></img>
-          <img src="./src/resources/images/bg3.jpg" className="nutr--image3"></img>
+          <img alt="food" src="./src/resources/images/bg1.jpg" className="nutr--image1"></img>
+          <img alt="food" src="./src/resources/images/bg2.png" className="nutr--image2"></img>
+          <img alt="food" src="./src/resources/images/bg3.jpg" className="nutr--image3"></img>
         </div>
         <div className="cuisine--content--container">
           <div onClick={handleClick} className="cuisine--container">

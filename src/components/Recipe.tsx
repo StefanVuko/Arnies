@@ -68,6 +68,7 @@ function Recipe(props: any) {
         <div className="recipe--image--container">
           <Link to={`/recipeInformation?id=${props.id}`}>
             <img
+              alt="recipe"
               src={props.img}
               className="recipe--image">
             </img>
@@ -85,6 +86,7 @@ function Recipe(props: any) {
                 props.isFavorite ? removeFromFavorites(obj) : addToFavorites(obj)
               }}
               className="recipe--image--add"
+              alt="add"
               src={props.isFavorite ? "./src/resources/images/remove.png" : "./src/resources/images/add.png"}>
             </img>
           </div>

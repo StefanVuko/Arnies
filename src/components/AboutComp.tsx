@@ -30,6 +30,7 @@ function AboutComp() {
       </div>
       <div className="about--image--container">
         <img
+          alt="motivation"
           id="about--image"
           src={images[currentImageIndex]}
         >

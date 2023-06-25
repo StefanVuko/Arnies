@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 function Section(props: any) {
   return (
     <section>
+
       <div className="section--container">
         {props.isFlipped ? (
           <>
@@ -51,7 +52,7 @@ function RenderText(props: any) {
       </div>
       <div className="section--button--container">
         <Link className="section--button" to={`/${props.buttonUrl}`}>
-          <button className="section--button">{props.buttonTxt}</button>
+          <p>{props.buttonTxt}</p>
         </Link>
       </div>
     </div>
