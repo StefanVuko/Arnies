@@ -29,6 +29,8 @@ interface IAuthContext {
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>
   username: string
   setUsername: Dispatch<SetStateAction<string>>
+  jwt: string
+  setJwt: Dispatch<SetStateAction<string>>
 }
 
 import { createContext, SetStateAction, Dispatch } from "react";
@@ -37,5 +39,7 @@ export const AuthContext = createContext<IAuthContext>({
   isLoggedIn: false,
   setIsLoggedIn: () => { },
   username: "",
-  setUsername: () => { }
+  setUsername: () => { },
+  jwt: "",
+  setJwt: () => { }
 })

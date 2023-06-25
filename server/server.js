@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require('cors')
+const jwt = require("jsonwebtoken")
 const userData = require("./data/user")
 const userFavorites = require("./data/userFavorites")
 const app = express();
@@ -22,10 +23,13 @@ const options = {
 }
 
 const apiKeyFood = "6d3d041bbeb749a5b3f6c979b0be454d"
+const secret = "755456279cfdb399c166b1135de1a5dd117be1b0e560e8b769bffe8509a9e5454a23cf3f707dac261713c4214f7e862d4a82b70b3fad8e49f6d91d8f44f4a443"
+const secretRefresh = "442466505e340c027e50be57f67f693410544e88d055d2d4a1dc6d361dd802cbc2aadf86cba262fa4b12cd2495cb225ed43ea26b7008b446df6cdb8326bb65a4"
 
 app.post("/login", async (req, res) => {
   const { username } = req.body
   const { password } = req.body
+  const user = { username: username }
 
   let isLoggedIn = false;
 
@@ -36,7 +40,9 @@ app.post("/login", async (req, res) => {
     }
   });
 
-  isLoggedIn ? res.sendStatus(200) : res.sendStatus(401)
+  const accessToken = jwt.sign(user, secret)
+
+  isLoggedIn ? res.json({ accessToken: accessToken }) : res.sendStatus(401)
 })
 
 app.post("/register", async (req, res) => {
@@ -46,6 +52,7 @@ app.post("/register", async (req, res) => {
   const { firstName } = req.body
   const { lastName } = req.body
   const newUser = { username, password, email, firstName, lastName }
+  const user = { username: username }
 
   let favoriteRecipes = []
   let favoriteWorkouts = []
@@ -59,7 +66,9 @@ app.post("/register", async (req, res) => {
 
   userData[username] = newUser
   userFavorites[username] = newUserFavorites
-  res.sendStatus(200)
+
+  const accessToken = jwt.sign(user, secret)
+  res.json(accessToken)
 })
 
 app.get("/getBodyParts", async (req, res) => {
@@ -209,5 +218,18 @@ app.get("/getUserFavorites/:username", async (req, res) => {
 
   res.json(userFavorites[username])
 })
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers("authorization")
+  const token = authHeader && authHeader.split(" ")[1]
+  if (token == null) return res.sendStatus(401)
+
+  jwt.verify(token, secret, (err, user) => {
+    if (err) return res.sendStatus(403)
+
+    req.user = user
+    next()
+  })
+}
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

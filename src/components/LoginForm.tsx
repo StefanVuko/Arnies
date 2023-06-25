@@ -5,7 +5,7 @@ import { AuthContext } from "../contexts/AuthContext";
 function LoginForm() {
 
   //const x = useContext(AuthContext)
-  const { setIsLoggedIn, setUsername } = useContext(AuthContext)
+  const { setIsLoggedIn, setUsername, setJwt } = useContext(AuthContext)
 
   function checkIfValidInput() {
     let isValidInput = false;
@@ -36,6 +36,7 @@ function LoginForm() {
     const username = (document.getElementById("username") as HTMLInputElement).value
     const password = (document.getElementById("password") as HTMLInputElement).value
     const user = { username, password }
+    let status = 0
 
     fetch("http://localhost:5000/login",
       {
@@ -46,14 +47,20 @@ function LoginForm() {
         body: JSON.stringify(user)
       })
       .then(resp => {
-        checkResponse(resp.status)
+        status = resp.status
+        return resp
+      })
+      .then(resp => resp.json())
+      .then(resp => {
+        checkResponse(status, resp.accessToken)
       })
   }
 
-  function checkResponse(response: number) {
+  function checkResponse(response: number, accessToken: any) {
     if (response === 200) {
       setUsername((document.getElementById("username") as HTMLInputElement).value)
       setIsLoggedIn(true)
+      setJwt(accessToken)
     }
     if (response === 401) {
       alert("User not found or wrong password!")

@@ -3,7 +3,7 @@ import { AuthContext } from "../contexts/AuthContext";
 
 function RegisterForm() {
 
-  const { setIsLoggedIn, setUsername } = useContext(AuthContext)
+  const { setIsLoggedIn, setUsername, setJwt } = useContext(AuthContext)
 
   function checkIfValidInput() {
     let isValidInput = false;
@@ -40,6 +40,7 @@ function RegisterForm() {
     const lastName = (document.getElementById("lastName") as HTMLInputElement).value
     const email = (document.getElementById("email") as HTMLInputElement).value
     const newUser = { username, password, firstName, lastName, email }
+    let status = 0
 
     fetch("http://localhost:5000/register",
       {
@@ -50,14 +51,20 @@ function RegisterForm() {
         body: JSON.stringify(newUser)
       })
       .then(resp => {
-        checkResponse(resp.status)
+        status = resp.status
+        return resp
+      })
+      .then(resp => resp.json())
+      .then(resp => {
+        checkResponse(status, resp.accessToken)
       })
   }
 
-  function checkResponse(response: number) {
+  function checkResponse(response: number, accessToken: any) {
     if (response === 200) {
       setUsername((document.getElementById("username") as HTMLInputElement).value)
       setIsLoggedIn(true)
+      setJwt(accessToken)
     }
     if (response === 401) {
       alert("User already exists!")

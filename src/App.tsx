@@ -19,9 +19,10 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [username, setUsername] = useState("")
+  const [jwt, setJwt] = useState("")
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, username, setUsername }}>
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, username, setUsername, jwt, setJwt }}>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/home" element={<Home></Home>}></Route>
