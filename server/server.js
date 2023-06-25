@@ -23,6 +23,7 @@ const options = {
 }
 
 const apiKeyFood = "6d3d041bbeb749a5b3f6c979b0be454d"
+const apiKeyWeather = "a0db37a8b6924826bc0232348232506"
 const secret = "755456279cfdb399c166b1135de1a5dd117be1b0e560e8b769bffe8509a9e5454a23cf3f707dac261713c4214f7e862d4a82b70b3fad8e49f6d91d8f44f4a443"
 const secretRefresh = "442466505e340c027e50be57f67f693410544e88d055d2d4a1dc6d361dd802cbc2aadf86cba262fa4b12cd2495cb225ed43ea26b7008b446df6cdb8326bb65a4"
 
@@ -218,6 +219,19 @@ app.get("/getUserFavorites", authenticateToken, async (req, res) => {
   const { username } = req.user
 
   res.json(userFavorites[username])
+})
+
+app.get("/getWeather", authenticateToken, async (req, res) => {
+  const location = req.query.location
+  const url = `http://api.weatherapi.com/v1/current.json?q=${location}&key=${apiKeyWeather}`
+
+  try {
+    const response = await fetch(url);
+    const result = await response.text();
+    res.json(result)
+  } catch (error) {
+    console.error(error);
+  }
 })
 
 function authenticateToken(req, res, next) {
