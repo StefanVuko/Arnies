@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import Cookies from "js-cookie";
 
 
 function LoginForm() {
@@ -50,7 +51,13 @@ function LoginForm() {
         status = resp.status
         return resp
       })
-      .then(resp => resp.json())
+      .then(resp => {
+        if (status === 200)
+          return resp.json()
+        else {
+          return resp
+        }
+      })
       .then(resp => {
         checkResponse(status, resp.accessToken)
       })
@@ -58,6 +65,7 @@ function LoginForm() {
 
   function checkResponse(response: number, accessToken: any) {
     if (response === 200) {
+      Cookies.set("jwtToken", accessToken)
       setUsername((document.getElementById("username") as HTMLInputElement).value)
       setIsLoggedIn(true)
       setJwt(accessToken)

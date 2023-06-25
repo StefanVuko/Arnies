@@ -68,7 +68,7 @@ app.post("/register", async (req, res) => {
   userFavorites[username] = newUserFavorites
 
   const accessToken = jwt.sign(user, secret)
-  res.json(accessToken)
+  res.json({ accessToken: accessToken })
 })
 
 app.get("/getBodyParts", async (req, res) => {
@@ -121,8 +121,8 @@ app.get("/getRecipeInformation", async (req, res) => {
   }
 })
 
-app.post("/addFavoriteRecipe", async (req, res) => {
-  const { username } = req.body
+app.post("/addFavoriteRecipe", authenticateToken, async (req, res) => {
+  const { username } = req.user
   const { id } = req.body
   const { title } = req.body
   const { img } = req.body
@@ -135,8 +135,8 @@ app.post("/addFavoriteRecipe", async (req, res) => {
   res.sendStatus(200)
 })
 
-app.delete("/removeFavoriteRecipe", async (req, res) => {
-  const { username } = req.body
+app.delete("/removeFavoriteRecipe", authenticateToken, async (req, res) => {
+  const { username } = req.user
   const { id } = req.body
   const { title } = req.body
   const { img } = req.body
@@ -150,8 +150,8 @@ app.delete("/removeFavoriteRecipe", async (req, res) => {
   res.sendStatus(200)
 })
 
-app.post("/addFavoriteExercise", async (req, res) => {
-  const { username } = req.body
+app.post("/addFavoriteExercise", authenticateToken, async (req, res) => {
+  const { username } = req.user
   const { id } = req.body
   const { name } = req.body
   const { img } = req.body
@@ -166,8 +166,8 @@ app.post("/addFavoriteExercise", async (req, res) => {
 })
 
 
-app.delete("/removeFavoriteExercise", async (req, res) => {
-  const { username } = req.body
+app.delete("/removeFavoriteExercise", authenticateToken, async (req, res) => {
+  const { username } = req.user
   const { id } = req.body
   const { name } = req.body
   const { img } = req.body
@@ -183,16 +183,17 @@ app.delete("/removeFavoriteExercise", async (req, res) => {
   res.sendStatus(200)
 })
 
-app.get("/getUserInfo/:username", async (req, res) => {
-  const username = req.params.username
+app.get("/getUserInfo", authenticateToken, async (req, res) => {
+  const { username } = req.user
 
   const data = userData[username]
 
   res.json(data)
 })
 
-app.put("/setUserInfo/:username", async (req, res) => {
-  const oldUsername = req.params.username
+app.put("/setUserInfo", authenticateToken, async (req, res) => {
+  const { username } = req.user
+  const oldUsername = username
   const newUserData = req.body
 
   /*console.log(oldUsername)
@@ -213,15 +214,15 @@ app.put("/setUserInfo/:username", async (req, res) => {
   res.sendStatus(200)
 })
 
-app.get("/getUserFavorites/:username", async (req, res) => {
-  const username = req.params.username
+app.get("/getUserFavorites", authenticateToken, async (req, res) => {
+  const { username } = req.user
 
   res.json(userFavorites[username])
 })
 
 function authenticateToken(req, res, next) {
-  const authHeader = req.headers("authorization")
-  const token = authHeader && authHeader.split(" ")[1]
+  const authHeader = req.headers["authorization"]
+  const token = authHeader
   if (token == null) return res.sendStatus(401)
 
   jwt.verify(token, secret, (err, user) => {

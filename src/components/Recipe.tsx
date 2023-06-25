@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 function Recipe(props: any) {
 
-  const { username } = useContext(AuthContext)
+  const { username, jwt } = useContext(AuthContext)
 
   let starString = ""
   for (let x = 0; x < props.stars; x++) {
@@ -16,7 +16,8 @@ function Recipe(props: any) {
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          "Authorization": jwt
         },
         body: JSON.stringify(obj)
       })
@@ -30,7 +31,8 @@ function Recipe(props: any) {
       {
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          "Authorization": jwt
         },
         body: JSON.stringify(obj)
       })
@@ -65,7 +67,7 @@ function Recipe(props: any) {
           <p className="recipe--stars">{starString}</p>
           <img
             onClick={() => {
-              const obj = { username: username, id: props.id, title: props.title, img: props.img, stars: props.stars }
+              const obj = { id: props.id, title: props.title, img: props.img, stars: props.stars }
               props.isFavorite ? removeFromFavorites(obj) : addToFavorites(obj)
             }}
             className="recipe--image--add"

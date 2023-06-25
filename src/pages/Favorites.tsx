@@ -10,10 +10,16 @@ function Favorites() {
   const [hasReceivedData, setHasReceivedData] = useState(false)
   const [favoriteRecipes, setFavoriteRecipes] = useState([])
   const [favoriteWorkouts, setFavoriteWorkouts] = useState([])
-  const { username } = useContext(AuthContext)
+  const { jwt } = useContext(AuthContext)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/getUserFavorites/${username}`)
+    fetch(`http://localhost:5000/getUserFavorites`,
+      {
+        method: "GET",
+        headers: {
+          "Authorization": jwt ? jwt : ""
+        }
+      })
       .then(resp => resp.json())
       .then(resp => {
         setFavoriteRecipes(resp.favoriteRecipes)
@@ -32,6 +38,7 @@ function Favorites() {
             favoriteRecipes.map((recipe: any) => {
               return (
                 <Recipe
+                  key={recipe.id}
                   id={recipe.id}
                   title={recipe.title}
                   img={recipe.img}
@@ -48,6 +55,7 @@ function Favorites() {
             favoriteWorkouts.map((workout: any) => {
               return (
                 <Exercise
+                  key={workout.id}
                   id={workout.id}
                   name={workout.name}
                   gifUrl={workout.img}

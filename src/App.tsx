@@ -14,12 +14,13 @@ import NotFound from "./pages/NotFound"
 import Logout from "./pages/Logout"
 import Settings from "./pages/Settings"
 import Favorites from "./pages/Favorites"
+import Cookies from "js-cookie"
 
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [username, setUsername] = useState("")
-  const [jwt, setJwt] = useState("")
+  const [jwt, setJwt] = useState(Cookies.get("jwtToken"))
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, username, setUsername, jwt, setJwt }}>

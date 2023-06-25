@@ -4,14 +4,15 @@ import { AuthContext } from "../contexts/AuthContext"
 
 function Exercise(props: any) {
 
-  const { username } = useContext(AuthContext)
+  const { username, jwt } = useContext(AuthContext)
 
   function addToFavorites(obj: Object) {
     fetch("http://localhost:5000/addFavoriteExercise",
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          "Authorization": jwt
         },
         body: JSON.stringify(obj)
       })
@@ -25,7 +26,8 @@ function Exercise(props: any) {
       {
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          "Authorization": jwt
         },
         body: JSON.stringify(obj)
       })
@@ -54,7 +56,6 @@ function Exercise(props: any) {
             <h2
               onClick={() => {
                 const obj = {
-                  username: username,
                   id: props.id,
                   img: props.gifUrl,
                   name: props.name,

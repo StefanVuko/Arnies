@@ -4,6 +4,8 @@ todo:
 - calorie calculator on tracker
 - fix logout console error
 - alerts when adding/removing favorites etc. for more feedback
+- bug when switching user settings / console error, doesn't allow to reload settings when changing username
+  - probably because username context gets updated but token doesn't so it's sending an invalid token
 
 done:
 
