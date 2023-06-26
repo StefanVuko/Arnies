@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require('cors')
 const jwt = require("jsonwebtoken")
+const xml = require("xml")
 const userData = require("./data/user")
 const userFavorites = require("./data/userFavorites")
 const app = express();
@@ -73,6 +74,8 @@ app.post("/register", async (req, res) => {
 })
 
 app.get("/getBodyParts", async (req, res) => {
+
+
   const url = 'https://exercisedb.p.rapidapi.com/exercises/bodyPartList';
   try {
     const response = await fetch(url, options);
@@ -197,6 +200,8 @@ app.put("/setUserInfo", authenticateToken, async (req, res) => {
   const oldUsername = username
   const newUserData = req.body
 
+  const user = { username: newUserData.username }
+
   /*console.log(oldUsername)
   console.log(newUserData.username)*/
 
@@ -207,12 +212,13 @@ app.put("/setUserInfo", authenticateToken, async (req, res) => {
   delete userFavorites[oldUsername]
   userFavorites[newUserData.username] = oldFavorites
 
+  const accessToken = jwt.sign(user, secret)
   /*console.log(userData[oldUsername])
   console.log(userFavorites[oldUsername])
   console.log(userData[newUserData.username])
   console.log(userFavorites[newUserData.username])*/
 
-  res.sendStatus(200)
+  res.json({ accessToken })
 })
 
 app.get("/getUserFavorites", authenticateToken, async (req, res) => {
@@ -232,6 +238,25 @@ app.get("/getWeather", authenticateToken, async (req, res) => {
   } catch (error) {
     console.error(error);
   }
+})
+
+app.patch("/updateUsername", authenticateToken, async (req, res) => {
+  const { username } = req.user
+  const oldUsername = username
+  const newUsername = req.body
+
+  const user = { username: newUsername.username }
+  const oldFavorites = userFavorites[oldUsername]
+  userData[newUsername.username] = { ...userData[oldUsername], username: newUsername.username }
+
+  delete userData[oldUsername]
+  delete userFavorites[oldUsername]
+
+  userFavorites[newUsername.username] = oldFavorites
+
+  const accessToken = jwt.sign(user, secret)
+
+  res.json({ accessToken })
 })
 
 function authenticateToken(req, res, next) {
