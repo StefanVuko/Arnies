@@ -1,9 +1,10 @@
 import { useEffect, useContext } from "react"
 import { AuthContext } from "../contexts/AuthContext"
+import Cookies from "js-cookie"
 
 function SettingsComp() {
 
-  const { username, setUsername, jwt } = useContext(AuthContext)
+  const { username, setUsername, jwt, setJwt } = useContext(AuthContext)
 
   useEffect(() => {
     fetch(`http://localhost:5000/getUserInfo`,
@@ -32,6 +33,8 @@ function SettingsComp() {
       firstName: (document.getElementById("lastName") as HTMLInputElement).value
     }
 
+    let status = 0
+
     fetch(`http://localhost:5000/setUserInfo`,
       {
         method: 'PUT',
@@ -42,16 +45,61 @@ function SettingsComp() {
         body: JSON.stringify(newUserData)
       })
       .then(resp => {
-        checkResponse(resp.status)
+        status = resp.status
+        return resp
+      })
+      .then(resp => {
+        if (status === 200)
+          return resp.json()
+        else {
+          return resp
+        }
+      })
+      .then(resp => {
+        checkResponse(status, resp.accessToken)
       })
   }
 
-  function checkResponse(response: number) {
+  function checkResponse(response: number, accessToken: any) {
     if (response === 200) {
+      Cookies.set("jwtToken", accessToken)
       setUsername((document.getElementById("username") as HTMLInputElement).value)
-      console.log("success!")
+      setJwt(accessToken)
     }
   }
+
+  function changeUsername() {
+    const newUsername = {
+      username: (document.getElementById("username") as HTMLInputElement).value,
+    }
+
+    let status = 0
+
+    fetch(`http://localhost:5000/updateUsername`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": jwt ? jwt : ""
+        },
+        body: JSON.stringify(newUsername)
+      })
+      .then(resp => {
+        status = resp.status
+        return resp
+      })
+      .then(resp => {
+        if (status === 200)
+          return resp.json()
+        else {
+          return resp
+        }
+      })
+      .then(resp => {
+        checkResponse(status, resp.accessToken)
+      })
+  }
+
 
   return (
     <div className="register--content">
@@ -81,6 +129,13 @@ function SettingsComp() {
             className="register--input--button"
             type="submit"
             value="Update">
+          </input>
+
+          <input
+            onClick={changeUsername}
+            className="register--input--button"
+            type="submit"
+            value="Only change username">
           </input>
         </div>
       </div>
