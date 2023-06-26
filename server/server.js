@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require('cors')
 const jwt = require("jsonwebtoken")
-const xml = require("xml")
 const userData = require("./data/user")
-const userFavorites = require("./data/userFavorites")
+const userFavorites = require("./data/userFavorites");
+const xmlbuilder = require("xmlbuilder");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -75,11 +75,22 @@ app.post("/register", async (req, res) => {
 
 app.get("/getBodyParts", async (req, res) => {
 
+  const isXml = req.query.xml
 
   const url = 'https://exercisedb.p.rapidapi.com/exercises/bodyPartList';
   try {
     const response = await fetch(url, options);
     const result = await response.text();
+
+    if (isXml) {
+      const xml = xmlbuilder
+        .create({ root: JSON.parse(result) })
+        .end({ pretty: true })
+      res.setHeader("Content-Type", "application/xml");
+      res.send(xml)
+      return
+    }
+
     res.json(result)
   } catch (error) {
     console.error(error);
@@ -89,10 +100,21 @@ app.get("/getBodyParts", async (req, res) => {
 app.get("/getExercise", async (req, res) => {
   const name = req.query.name
   const url = `https://exercisedb.p.rapidapi.com/exercises/name/${name}`
+  const isXml = req.query.xml
 
   try {
     const response = await fetch(url, options);
     const result = await response.text();
+
+    if (isXml) {
+      const xml = xmlbuilder
+        .create({ root: JSON.parse(result) })
+        .end({ pretty: true })
+      res.setHeader("Content-Type", "application/xml");
+      res.send(xml)
+      return
+    }
+
     res.json(result)
   } catch (error) {
     console.error(error);
@@ -102,10 +124,21 @@ app.get("/getExercise", async (req, res) => {
 app.get("/getCuisine", async (req, res) => {
   const cuisine = req.query.cuisine
   const url = `https://api.spoonacular.com/recipes/complexSearch?cuisine=${cuisine}&number=10&apiKey=${apiKeyFood}`
+  const isXml = req.query.xml
 
   try {
     const response = await fetch(url);
     const result = await response.text();
+
+    if (isXml) {
+      const xml = xmlbuilder
+        .create({ root: JSON.parse(result) })
+        .end({ pretty: true })
+      res.setHeader("Content-Type", "application/xml");
+      res.send(xml)
+      return
+    }
+
     res.json(result)
   } catch (error) {
     console.error(error);
@@ -115,10 +148,21 @@ app.get("/getCuisine", async (req, res) => {
 app.get("/getRecipeInformation", async (req, res) => {
   const id = req.query.id
   const url = `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=${apiKeyFood}`
+  const isXml = req.query.xml
 
   try {
     const response = await fetch(url);
     const result = await response.text();
+
+    if (isXml) {
+      const xml = xmlbuilder
+        .create({ root: JSON.parse(result) })
+        .end({ pretty: true })
+      res.setHeader("Content-Type", "application/xml");
+      res.send(xml)
+      return
+    }
+
     res.json(result)
   } catch (error) {
     console.error(error);
@@ -189,8 +233,18 @@ app.delete("/removeFavoriteExercise", authenticateToken, async (req, res) => {
 
 app.get("/getUserInfo", authenticateToken, async (req, res) => {
   const { username } = req.user
+  const isXml = req.query.xml
 
   const data = userData[username]
+
+  if (isXml) {
+    const xml = xmlbuilder
+      .create({ root: JSON.parse(result) })
+      .end({ pretty: true })
+    res.setHeader("Content-Type", "application/xml");
+    res.send(xml)
+    return
+  }
 
   res.json(data)
 })
@@ -223,17 +277,38 @@ app.put("/setUserInfo", authenticateToken, async (req, res) => {
 
 app.get("/getUserFavorites", authenticateToken, async (req, res) => {
   const { username } = req.user
+  const isXml = req.query.xml
+
+  if (isXml) {
+    const xml = xmlbuilder
+      .create({ root: JSON.parse(result) })
+      .end({ pretty: true })
+    res.setHeader("Content-Type", "application/xml");
+    res.send(xml)
+    return
+  }
 
   res.json(userFavorites[username])
 })
 
 app.get("/getWeather", authenticateToken, async (req, res) => {
   const location = req.query.location
+  const isXml = req.query.xml
   const url = `http://api.weatherapi.com/v1/current.json?q=${location}&key=${apiKeyWeather}`
 
   try {
     const response = await fetch(url);
     const result = await response.text();
+
+    if (isXml) {
+      const xml = xmlbuilder
+        .create({ root: JSON.parse(result) })
+        .end({ pretty: true })
+      res.setHeader("Content-Type", "application/xml");
+      res.send(xml)
+      return
+    }
+
     res.json(result)
   } catch (error) {
     console.error(error);
