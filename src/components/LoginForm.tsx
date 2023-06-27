@@ -1,12 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import Cookies from "js-cookie";
-
+import Alert from "./Alert";
 
 function LoginForm() {
 
   //const x = useContext(AuthContext)
   const { setUsername, setJwt, setCount } = useContext(AuthContext)
+  const [notification, setNotification] = useState("");
+  const [hasSucceeded, setHasSucceeded] = useState(false);
 
   function checkIfValidInput() {
     let isValidInput = false;
@@ -71,34 +73,46 @@ function LoginForm() {
       setCount(1)
     }
     if (response === 401) {
-      alert("User not found or wrong password!")
+      setNotification("User not found or wrong password!");
+      setHasSucceeded(false)
+      setTimeout(() => {
+        setNotification("");
+      }, 2000);
     }
   }
 
   return (
-    <div className="register--content">
-      <div className="register--form--text">
-      </div>
-      <div className="register--form">
-        <div className="register--title">
-          <h1 className="register--title--h1">Arnie's</h1>
+    <>
+      {notification &&
+        <Alert
+          text={notification}
+          hasSucceeded={hasSucceeded}
+          onClose={() => setNotification("")}
+        />}
+      <div className="register--content">
+        <div className="register--form--text">
         </div>
-        <div className="register--form--input">
-          <form>
-            <label className="register--form--label" htmlFor="username">Username</label>
-            <input id="username" className="register--input--text" type="text"></input>
-            <label className="register--form--label" htmlFor="password">Password</label>
-            <input id="password" className="register--input--text" type="password"></input>
-            <p className="register--noUserText"><a className="register--noUserText" href="/register">Not a user? Register now!</a></p>
-          </form>
-          <input className="register--input--button"
-            type="submit"
-            value="Login"
-            onClick={submitLogin}>
-          </input>
+        <div className="register--form">
+          <div className="register--title">
+            <h1 className="register--title--h1">Arnie's</h1>
+          </div>
+          <div className="register--form--input">
+            <form>
+              <label className="register--form--label" htmlFor="username">Username</label>
+              <input id="username" className="register--input--text" type="text"></input>
+              <label className="register--form--label" htmlFor="password">Password</label>
+              <input id="password" className="register--input--text" type="password"></input>
+              <p className="register--noUserText"><a className="register--noUserText" href="/register">Not a user? Register now!</a></p>
+            </form>
+            <input className="register--input--button"
+              type="submit"
+              value="Login"
+              onClick={submitLogin}>
+            </input>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

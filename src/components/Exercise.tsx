@@ -47,7 +47,14 @@ function Exercise(props: any) {
         setNotification("");
       }, 2000);
     }
-    //Check if food has been added already
+
+    if (response === 401) {
+      setNotification("Exercise already in favorites!");
+      setHasSucceeded(false)
+      setTimeout(() => {
+        setNotification("");
+      }, 2000);
+    }
   }
 
   return (

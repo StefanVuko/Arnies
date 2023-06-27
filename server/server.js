@@ -178,8 +178,12 @@ app.post("/addFavoriteRecipe", authenticateToken, async (req, res) => {
 
   const obj = { id, title, img, stars }
 
+  if (userFavorites[username].favoriteRecipes.some(recipes => recipes.id === obj.id)) {
+    res.sendStatus(401)
+    return
+  }
+
   userFavorites[username].favoriteRecipes.push(obj)
-  console.log(userFavorites[username])
   res.sendStatus(200)
 })
 
@@ -208,6 +212,11 @@ app.post("/addFavoriteExercise", authenticateToken, async (req, res) => {
   const { target } = req.body
 
   const obj = { id, img, name, equipment, bodyPart, target }
+
+  if (userFavorites[username].favoriteWorkouts.some(workout => workout.id === obj.id)) {
+    res.sendStatus(401)
+    return
+  }
 
   userFavorites[username].favoriteWorkouts.push(obj)
   res.sendStatus(200)
